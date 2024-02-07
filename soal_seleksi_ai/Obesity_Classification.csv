@@ -1,0 +1,12 @@
+ID,Child,Age,Gender,Height,Weight,BMI,Category
+1,2,25,Male,175,80,0,Normal Weight
+2,3,30,Female,160,60,22.5,Normal Weight
+3,0,35,Male,180,90,27.3,Overweight
+4,2,40,Female,,50,20,Underweight
+5,1,45,Male,190,100,31.2,Obese
+6,1,50,Female,140,40,16.7,Underweight
+7,0,55,Male,200,110,34.2,Obese
+8,1,60,Emale,130,,13.3,Underweight
+9,1,65,Male,210,120,37.2,Obese
+10,2,70,Female,120,20,10,Underweight
+11,3,70,Female,120,20,10,Underweight
