@@ -6,20 +6,21 @@ from nltk.stem import PorterStemmer
 import re
 import math
 import numpy as np
+from wordcloud import WordCloud
+from PIL import Image
 
 data = pd.read_csv(r"C:\Users\Folive\Documents\Python\AI\Basic-Machine-Learning\KNN - Game Twitter Sentiment\twitter_training.csv")
 
 # Seleksi data yang akan digunakan [ Cleaning ]
 selected_data = data[["review", "sentiment"]]
 selected_data.dropna()
-selected_data = selected_data.iloc[1:10]
+selected_data = selected_data.iloc[1:2000]
 original_data = selected_data
 
 # Mengubah semua alfabet menjadi alfabet kecil [ Case Folding ]
 selected_data['review'] = selected_data['review'].str.lower()
 selected_data['review'] = selected_data['review'].astype(str)
 selected_data['review'] = selected_data['review'].apply(lambda x: re.sub(r'[^\w\s]', '', x))
-
 
 # Tokenize
 selected_data['tokenize'] = selected_data['review'].apply(word_tokenize)
@@ -130,10 +131,22 @@ y = selected_data['sentiment'].values
 
 knn.fit(x, y)
 
-result = []
-for index, document in original_data['review'].items():
-    result.append(knn.predict(input(document)))
+def acc():
+    result = []
+    for index, document in original_data['review'].items():
+        result.append(knn.predict(input(document)))
 
-result_dataframe = pd.DataFrame({'Review' : original_data['review'], 'Prediction' : result})
+    result_dataframe = pd.DataFrame({'Review' : original_data['review'], 'Prediction' : result})
 
-print(result_dataframe)
+    result_dataframe['Actual'] = original_data['sentiment']
+    result_dataframe['Prediction'] = result_dataframe['Prediction'].apply(lambda x: x[0])
+
+    result_dataframe['Correct'] = (result_dataframe['Prediction'] == result_dataframe['Actual'])
+
+    accuracy = result_dataframe['Correct'].sum() / len(result_dataframe)
+
+    print(accuracy)
+
+print(knn.predict(input("for a game, this is too good")))
+
+wc = WordCloud().generate(original_data['review'].values)
