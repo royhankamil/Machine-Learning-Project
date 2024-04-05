@@ -148,5 +148,3 @@ def acc():
     print(accuracy)
 
 print(knn.predict(input("for a game, this is too good")))
-
-wc = WordCloud().generate(original_data['review'].values)
