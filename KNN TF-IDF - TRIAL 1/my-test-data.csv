@@ -1,0 +1,4 @@
+Review,Sentiment,Index
+"I I Loves Matcha!",Positive,0
+"I Hates Matcha!",Negative,1
+"I Don't care about matcha", Neutral, 2
