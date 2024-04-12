@@ -1,6 +1,7 @@
 import re
 import math
 from nltk.stem import PorterStemmer
+import pandas as pd
 
 class TextCleaner:
     def __init__(self):
@@ -9,12 +10,15 @@ class TextCleaner:
     def RemoveSpecialCharacter(self):
         try:
             for key, value in self.documents.items():
+                self.documents[key] = str(value)
                 cleaned_value = re.sub("[!@#$%^&*()'`,.’1234567890]", '', value)
                 self.documents[key] = cleaned_value
         except:
-            cleaned_value = re.sub("[!@#$%^&*()'`,.’1234567890]", '', self.documents)
-            self.documents = cleaned_value
-
+            if not isinstance(self.documents, pd.Series):
+                cleaned_value = re.sub("[!@#$%^&*()'`,.’1234567890]", '', self.documents)
+                self.documents = cleaned_value
+            else:
+                print('"its an instance of pd.series')
     def LowerCase(self):
         try:
             for key, value in self.documents.items():
@@ -38,7 +42,7 @@ class TextCleaner:
                 tokens = []
                 for word in value:
                     tokens.append(stemmer.stem(word))
-                self.documents[key] = tokens
+                self.documents.loc[key] = tokens
         except:
             tokens = []
             for word in self.documents:

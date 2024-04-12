@@ -2,12 +2,13 @@ import pandas as pd
 import Model
 
 # Comment Sentiment. A value of zero represents a negative sentiment, whereas values of one and two represent neutral
-df = pd.read_csv(r"C:\Users\Folive\Documents\Python\AI\Basic-Machine-Learning\KNN TF-IDF Trial 2\comments.csv")
-sample_df = df.iloc[0:4, :]
-xtrain = sample_df["Comment"]
-ytrain = sample_df["Sentiment"]
+df = pd.read_csv(r"C:\Users\Folive\Documents\Python\AI\Basic-Machine-Learning\KNN TF-IDF Trial 2\twitter_training.csv")
+sample_df = df.iloc[:400, :]
+xtrain = sample_df["review"]
+ytrain = sample_df["sentiment"]
 
-KNN_Model = Model.KNN()
+KNN_Model = Model.KNN(k=11)
 
 KNN_Model.Fit(xtrain, ytrain)
-KNN_Model.Predict("This is a good pocket")
+KNN_Model.Train()
+#print(KNN_Model.Predict("that was the first borderlands session in a long time where i actually had a really satisfying combat experience. i got some really good kills"))

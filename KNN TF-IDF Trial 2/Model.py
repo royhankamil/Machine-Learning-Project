@@ -11,7 +11,7 @@ class KNN:
         self.range = {}
         self.voted = {}
         self.voting_result = {}
-        self.class_result = 0
+        self.class_result = None
         self.k = k
 
     def Fit(self, xtrain, ytrain):
@@ -46,7 +46,8 @@ class KNN:
             else:
                 self.voting_result[values] +=1
 
-        self.class_result = numpy.argmax(list(self.voting_result.values()))
+        voted = numpy.argmax(list(self.voting_result.values()))
+        self.class_result = list(self.voting_result.keys())[voted]
 
     def Predict(self, xtest):
         self.x_test = xtest
@@ -59,3 +60,11 @@ class KNN:
             self.range[index] = math.sqrt(sum(range))
 
         self.Vote()
+        
+        return self.class_result
+    
+    def Train(self):
+        class_result = {}
+        for index in range(len(self.x_train)):
+            print(index, self.Predict(self.x_train[index]))
+        #print(self.Predict(self.x_train[3]))
