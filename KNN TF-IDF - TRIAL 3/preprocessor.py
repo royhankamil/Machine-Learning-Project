@@ -12,6 +12,7 @@ class TFIDFVectorizer:
         self.idf_tokens = []
         self.tfidf = {}
         
+    # Preprocess text
     def preprocess(self, documents):
         stemmer = PorterStemmer()
         preprocessed_documents = {}
@@ -19,6 +20,7 @@ class TFIDFVectorizer:
             preprocessed_documents[index] = [stemmer.stem(word) for word in re.sub("[,.:)/(!'1234567890&-@]", '', str(document)).lower().split() if len(word) != 1]
         return preprocessed_documents
 
+    # Calculate Term Frequency
     def term_frequency(self):
         for index, document in self.preprocessed_documents.items():
             term_frequency = {}
@@ -30,6 +32,7 @@ class TFIDFVectorizer:
                     term_frequency[word] = 1
             self.tf[index] = {key: value/document_length for key, value in term_frequency.items()}
 
+    # Calculate IDF
     def inverse_document_frequency(self):
         self.documents_length = len(self.documents)
         self.idf_tokens = set()
@@ -45,6 +48,7 @@ class TFIDFVectorizer:
 
         self.idf = {key: math.log(self.documents_length/value) for key, value in self.idf.items()}
 
+    # Calculate TFIDF
     def calculate_tfidf(self):
         for index, document in self.tf.items():
             self.tfidf[index] = {key: value*self.idf[key] for key, value in document.items()}
@@ -52,6 +56,7 @@ class TFIDFVectorizer:
                 if word not in self.tfidf[index]:
                     self.tfidf[index][word] = 0
 
+    # Calculate TF-IDF for test data
     def calculate_predict_tfidf(self, text = ""):
         text = self.preprocess({0:text})
         text = [word for word in text.values() for word in word if word in self.idf_tokens]
