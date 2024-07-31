@@ -1,0 +1,19 @@
+learn about data science : https://academy.dqlab.id/main
+free sertificates AI :https://cognitiveclass.ai/learn-ai-hands-on-reinforcement-learning
+free sertificates tensorflow : https://cognitiveclass.ai/courses/deep-learning-with-tensorflow
+update sertificates and others : https://docs.google.com/spreadsheets/d/1uUYYiIlH1yCzSLSlxOKresM5FRYmFLLkLwpldyQnvCk/edit?gid=265388022#gid=265388022 
+free learning deep learning : https://www.deeplearning.ai/
+ai roadmap : https://roadmap.sh/ai-data-scientist 
+deep learning beginner practice : https://teachablemachine.withgoogle.com/
+AI Challenge hacker rank : https://www.hackerrank.com/domains/ai
+
+nvidia course 
+1. https://www.nvidia.com/en-us/glossary/data-science/generative-ai/
+2. https://www.youtube.com/watch?v=Rk3nTUfRZmo
+3. https://www.nvidia.com/en-us/events/siggraph/
+4. https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/
+5. https://www.nvidia.com/en-us/ai-data-science/ai-workflows/generative-ai-chatbots/
+6. https://developer.nvidia.com/blog/rag-101-demystifying-retrieval-augmented-generation-pipelines/
+7. https://developer.nvidia.com/blog/deploying-retrieval-augmented-generation-applications-on-nvidia-gh200-delivers-accelerated-performance/
+8. https://github.com/NVIDIA/GenerativeAIExamples
+
