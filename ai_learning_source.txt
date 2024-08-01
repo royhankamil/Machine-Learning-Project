@@ -1,7 +1,7 @@
+update sertificates and others : https://docs.google.com/spreadsheets/d/1uUYYiIlH1yCzSLSlxOKresM5FRYmFLLkLwpldyQnvCk/edit?gid=265388022#gid=265388022 
 learn about data science : https://academy.dqlab.id/main
 free sertificates AI :https://cognitiveclass.ai/learn-ai-hands-on-reinforcement-learning
 free sertificates tensorflow : https://cognitiveclass.ai/courses/deep-learning-with-tensorflow
-update sertificates and others : https://docs.google.com/spreadsheets/d/1uUYYiIlH1yCzSLSlxOKresM5FRYmFLLkLwpldyQnvCk/edit?gid=265388022#gid=265388022 
 free learning deep learning : https://www.deeplearning.ai/
 ai roadmap : https://roadmap.sh/ai-data-scientist 
 deep learning beginner practice : https://teachablemachine.withgoogle.com/
