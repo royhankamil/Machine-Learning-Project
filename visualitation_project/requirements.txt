@@ -1,0 +1,6 @@
+Library yang digunakan untuk analisis
+- streamlit 
+- matplotlib
+- seaborn 
+- pandas 
+- numpy
