@@ -1,6 +1,5 @@
-Library yang digunakan untuk analisis
-- streamlit 
-- matplotlib
-- seaborn 
-- pandas 
-- numpy
+streamlit
+matplotlib
+seaborn
+pandas
+numpy
