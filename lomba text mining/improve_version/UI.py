@@ -30,12 +30,14 @@ st.area_chart(chart_data)
 st.subheader("Komentar Sentimen")
 user_input = st.text_area("Masukkan komentar Anda di sini:")
 
-# Placeholder for the sentiment result
-if user_input:
-    # You can replace this logic with a sentiment analysis model later
-    sentiment_result = "sentimen positif"  # Contoh hasil sementara
-else:
-    sentiment_result = "Tidak ada input"
+# Button for prediction
+if st.button("Prediksi"):
+    # Placeholder for the sentiment result
+    if user_input:
+        # You can replace this logic with a sentiment analysis model later
+        sentiment_result = "sentimen positif"  # Contoh hasil sementara
+    else:
+        sentiment_result = "Tidak ada input"
 
-# Display the sentiment result below the text area
-st.write(f"Sentiment: {sentiment_result}")
+    # Display the sentiment result below the text area
+    st.write(f"Sentiment: {sentiment_result}")
