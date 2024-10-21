@@ -5,8 +5,8 @@ import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-nltk.download("punkt")
-nltk.download("stopwords")
+nltk.download("punkt", download_dir='/path/to/nltk_data')
+nltk.download("stopwords", download_dir='/path/to/nltk_data')
 import string
 import re
 
