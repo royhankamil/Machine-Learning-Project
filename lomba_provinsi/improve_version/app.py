@@ -19,7 +19,7 @@ word_set_path = os.path.join(BASE_DIR, 'model/word_set.pkl')
 indexdict_path = os.path.join(BASE_DIR, 'model/index_dict.pkl')
 word_count_path = os.path.join(BASE_DIR, 'model/word_count.pkl')
 preprocessing_path = os.path.join(BASE_DIR, 'model/preprocessing.pkl')
-alldata_path = os.path.join(BASE_DIR, 'Training/all_word_data.csv')
+alldata_path = os.path.join(BASE_DIR, 'training/all_word_data.csv')
 
 model = load_pickle(model_path)
 word_set = load_pickle(word_set_path)
