@@ -1,130 +1,94 @@
 # # menyiapkan library
 import numpy as np
-# import matplotlib.pyplot as plt
-# import pandas as pd
-# from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-# from nltk.corpus import stopwords
-# from nltk.tokenize import word_tokenize
-# import string
-# import re
+import pandas as pd
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import string
+import re
 
 
-# def case_folding(text):
-#     text = re.sub(r'@[A-Za-z0-9_]+', '', text)
-#     text = re.sub(r'[^A-Za-z0-9\s]+', '', text)
-#     text = re.sub(r'#\w+', '', text)
-#     text = re.sub(r'https?://\S+', '', text)
-#     text = re.sub(r'\n+', '', text)
-#     text = re.sub(r'\r+', '', text)
-#     text = re.sub(r'\d+', '', text)
+class Preprocessing:
+    def __init__(self, word_set, index_dict, word_count, total_documents):
+        self.word_set = word_set
+        self.index_dict = index_dict
+        self.word_count = word_count
+        self.total_documents = total_documents
+        self.norm_word = {"emg" : "memang","saiz" : "size","cino" : "cina","jowo" : "jawa","kite" : "kita","lg" : "lagi","aj" : "aja","yg" : "yang","pdhl" : "padahal","napa" : "kenapa","dh" : "sudah","udh" : "sudah","tdk" : "tidak","sm" : "sama","ga" : "tidak","bgt" : "banget","mentri" : "menteri","embantu" : "membantu","dlm" : "dalam","bdang" : "bidang","msh" : "masih","ampe" : "sampai","ky" : "kaya","nnya" : "tanya","krn" : "karena","jir" : "anjing","ajg" : "anjing","anjir" : "anjing","gak" : "tidak","ak" : "aku","dasr" : "dasar","lgsg" : "langsung","skrg" : "sekarang","gw" : "gua","w" : "gua","engga" : "tidak","dgn" : "dengan","orng" : "orang","org" : "orang","ni" : "ini","jgn" : "jangan","mbahas" : "bahas","krna" : "karena","ma" : "sama","sblm" : "sebelum","tp" : "tapi","sbg" : "sebagai","kl" : "kalau"}
 
-#     text = text.translate(str.maketrans("", "", string.punctuation))
+    def case_folding(self, text):
+        text = re.sub(r'@[A-Za-z0-9_]+', '', text)
+        text = re.sub(r'[^A-Za-z0-9\s]+', '', text)
+        text = re.sub(r'#\w+', '', text)
+        text = re.sub(r'https?://\S+', '', text)
+        text = re.sub(r'\n+', '', text)
+        text = re.sub(r'\r+', '', text)
+        text = re.sub(r'\d+', '', text)
 
-#     emoji_pattern = re.compile("["
-#                                u"\U0001F600-\U0001F64F"
-#                                u"\U0001F300-\U0001F5FF"
-#                                u"\U0001F680-\U0001F6FF"
-#                                u"\U00010000-\U0010ffff"
-#                                "]+", flags=re.UNICODE)
-#     text = emoji_pattern.sub(r"", text)
+        text = text.translate(str.maketrans("", "", string.punctuation))
 
-#     return text.lower()
+        emoji_pattern = re.compile("["
+                                u"\U0001F600-\U0001F64F"
+                                u"\U0001F300-\U0001F5FF"
+                                u"\U0001F680-\U0001F6FF"
+                                u"\U00010000-\U0010ffff"
+                                "]+", flags=re.UNICODE)
+        text = emoji_pattern.sub(r"", text)
 
-# def tokenize(text):
-#     return word_tokenize(text)
-
-# norm_word = {
-#     "emg" : "memang",
-#     "saiz" : "size",
-#     "cino" : "cina",
-#     "jowo" : "jawa",
-#     "kite" : "kita",
-#     "lg" : "lagi",
-#     "aj" : "aja",
-#     "yg" : "yang",
-#     "pdhl" : "padahal",
-#     "napa" : "kenapa",
-#     "dh" : "sudah",
-#     "udh" : "sudah",
-#     "tdk" : "tidak",
-#     "sm" : "sama",
-#     "ga" : "tidak",
-#     "bgt" : "banget",
-#     "mentri" : "menteri",
-#     "embantu" : "membantu",
-#     "dlm" : "dalam",
-#     "bdang" : "bidang",
-#     "msh" : "masih",
-#     "ampe" : "sampai",
-#     "ky" : "kaya",
-#     "nnya" : "tanya",
-#     "krn" : "karena",
-#     "jir" : "anjing",
-#     "ajg" : "anjing",
-#     "anjir" : "anjing",
-#     "gak" : "tidak",
-#     "ak" : "aku",
-#     "dasr" : "dasar",
-#     "lgsg" : "langsung",
-#     "skrg" : "sekarang",
-#     "gw" : "gua",
-#     "w" : "gua",
-#     "engga" : "tidak",
-#     "dgn" : "dengan",
-#     "orng" : "orang",
-#     "org" : "orang",
-#     "ni" : "ini",
-#     "jgn" : "jangan",
-#     "mbahas" : "bahas",
-#     "krna" : "karena",
-#     "ma" : "sama",
-#     "sblm" : "sebelum",
-#     "tp" : "tapi",
-#     "sbg" : "sebagai",
-#     "kl" : "kalau"
-# }
-
-# # mengembalikan text yang sudah dinormalisasi 
-# def normalize(text):
-#     return [norm_word[word] if word in norm_word else word for word in text]
-
-
-# # mengembalikan text yang sudah di stopwords
-# def stopword(text):
-#     stopw = stopwords.words("indonesian")
-#     return [word for word in text if word not in stopw]
-
-
-# def stemming(text):
-#     stemmer = StemmerFactory().create_stemmer()
-#     return [stemmer.stem(word) for word in text]
-
-
-# def preprocess_input(text):
-#     # Apply case folding
-#     text = case_folding(text)
-#     # Tokenize the input
-#     tokens = tokenize(text)
-#     # Normalize tokens
-#     tokens = normalize(tokens)
-#     # Remove stopwords
-#     tokens = stopword(tokens)
-#     # Stem tokens
-#     tokens = stemming(tokens)
-#     return tokens
-
-# def transform_to_tfidf(input_text):
-#     # Preprocess the input
-#     tokens = preprocess_input(input_text)
+        return text.lower()
     
-#     # Convert the preprocessed tokens to a TF-IDF vector
-#     vector = np.zeros((len(word_set),))
-#     for word in tokens:
-#         if word in word_set:
-#             tf = termfreq(tokens, word)
-#             idf = inverse_doc_freq(word)
-#             vector[index_dict[word]] = tf * idf
-#     return vector
+    def tokenize(self, text):
+        return word_tokenize(text)
+    
+    def stopword(self, text):
+        stopw = stopwords.words("indonesian")
+        return [word for word in text if word not in stopw]
+    
+    def normalize(self, text):
+        return [self.norm_word[word] if word in self.norm_word else word for word in text]
+    
+    def stemming(self, text):
+        stemmer = StemmerFactory().create_stemmer()
+        return [stemmer.stem(word) for word in text]
+    
+    def termfreq(self, document, word):
+        N = len(document)
+        occurance = len([token for token in document if token==word])
+        return occurance/N
+    
+    def inverse_doc_freq(self, word):
+        try:
+            word_occurance = self.word_count[word] + 1
+        except:
+            word_occurance = 1
+        return np.log(self.total_documents/word_occurance)
+    
+    def preprocess_input(self, text):
+        # Apply case folding
+        text = self.case_folding(text)
+        # Tokenize the input
+        tokens = self.tokenize(text)
+        # Normalize tokens
+        tokens = self.normalize(tokens)
+        # Remove stopwords
+        tokens = self.stopword(tokens)
+        # Stem tokens
+        tokens = self.stemming(tokens)
+        return tokens
+    
+    def transform_to_tfidf(self,input_text):
+        # Preprocess the input
+        tokens = self.preprocess_input(input_text)
+        
+        # Convert the preprocessed tokens to a TF-IDF vector
+        vector = np.zeros((len(self.word_set),))
+        for word in tokens:
+            if word in self.word_set:
+                tf = self.termfreq(tokens, word)
+                idf = self.inverse_doc_freq(word)
+                vector[self.index_dict[word]] = tf * idf
+        return vector
+    
 
 class KNN:
     def __init__(self, n_neighbors=3, weight="uniform", distance_metric="euclidean", p=2):

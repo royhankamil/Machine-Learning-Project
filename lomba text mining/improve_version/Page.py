@@ -1,87 +1,65 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from wordcloud import WordCloud  # Perbaikan impor yang benar
+from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import pickle
 from Algorithm import KNN
+from Algorithm import Preprocessing
 
-with open('model/knn_model.pkl', 'rb') as file:
-    model = pickle.load(file)
+# Load pre-trained model and supporting files
+def load_pickle(file_path):
+    with open(file_path, 'rb') as file:
+        return pickle.load(file)
 
-with open('model/word_set.pkl', 'rb') as file:
-    word_set = pickle.load(file)
+model = load_pickle('model/knn_model.pkl')
+word_set = load_pickle('model/word_set.pkl')
+index_dict = load_pickle('model/index_dict.pkl')
+word_count = load_pickle('model/word_count.pkl')
+preprocessing = load_pickle('model/preprocessing.pkl')
 
-with open('model/index_dict.pkl', 'rb') as file:
-    index_dict = pickle.load(file)
-
-with open('model/word_count.pkl', 'rb') as file:
-    word_count = pickle.load(file)
-
+# Function to predict sentiment based on input text
 def predict_sentiment(input_text):
-    # Preprocess dan transformasi input menjadi TF-IDF
-    tfidf_vector = transform_to_tfidf(input_text)
+    # Preprocess and transform input to TF-IDF
+    tfidf_vector = preprocessing.transform_to_tfidf(input_text)
     prediction = model.predict([tfidf_vector])
     return prediction
 
-# Membaca data CSV
-all_wordo = pd.read_csv("all_word_data.csv")
+# Function to display WordCloud using Streamlit
+def display_wordcloud(column_data, title, colormap="Blues_r"):
+    st.write(title)
+    wordcloud = WordCloud(
+        height=800,
+        width=1200,
+        collocations=False,
+        colormap=colormap
+    ).generate(' '.join(column_data.dropna().to_list()))
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.imshow(wordcloud, interpolation="bilinear")
+    ax.axis("off")
+    st.pyplot(fig)
 
-# Fungsi untuk menampilkan WordCloud menggunakan Streamlit
-def showing(wc):
-    fig, ax = plt.subplots(figsize=(12, 8))  # Membuat figure dan axes
-    ax.imshow(wc, interpolation="bilinear")
-    ax.axis("off")  # Menghilangkan axis
-    st.pyplot(fig)  # Menampilkan figure di Streamlit
-
-# Set the title of the app
+# Title and subheader
 st.title("Komentar Sentimen")
-
-# Adding some charts
 st.subheader("Visualisasi Data Sentimen")
 
-# Membuat dan menampilkan WordCloud untuk kolom 'Ras'
-st.write("Distribusi Sentimen (WordCloud - Ras)")
-word_cloud = WordCloud(
-    height=800,
-    width=1200,
-    collocations=False,
-    colormap="Blues_r"
-).generate(' '.join(all_wordo["Ras"].dropna().to_list()))
-showing(word_cloud)
+# Load data for WordCloud visualization
+all_wordo = pd.read_csv("all_word_data.csv")
 
-# Membuat dan menampilkan WordCloud untuk kolom 'Agama'
-st.write("Distribusi Sentimen (WordCloud - Agama)")
-word_cloud1 = WordCloud(
-    height=800,
-    width=1200,
-    collocations=False,
-    colormap="Blues_r"
-).generate(' '.join(all_wordo["Agama"].dropna().to_list()))
-showing(word_cloud1)
+# Display WordClouds for different categories
+display_wordcloud(all_wordo["Ras"], "Distribusi Sentimen (WordCloud - Ras)")
+display_wordcloud(all_wordo["Agama"], "Distribusi Sentimen (WordCloud - Agama)")
+display_wordcloud(all_wordo["Netral"], "Distribusi Sentimen (WordCloud - Netral)")
 
-# Membuat dan menampilkan WordCloud untuk kolom 'Netral'
-st.write("Distribusi Sentimen (WordCloud - Netral)")
-word_cloud2 = WordCloud(
-    height=800,
-    width=1200,
-    collocations=False,
-    colormap="Blues_r"
-).generate(' '.join(all_wordo["Netral"].dropna().to_list()))
-showing(word_cloud2)
-
-# Create input text area for the comment
+# Input area for user comment
 st.subheader("Komentar Sentimen")
 user_input = st.text_area("Masukkan komentar Anda di sini:")
 
-# Button for prediction
+# Prediction button and result
 if st.button("Prediksi"):
-    # Placeholder for the sentiment result
     if user_input:
-        # You can replace this logic with a sentiment analysis model later
-        sentiment_result = predict_sentiment(user_input)
+        sentiment_code = predict_sentiment(user_input)
+        sentiment_result = "Netral" if sentiment_code == 0 else "Ras" if sentiment_code == 1 else "Agama"
+        st.write(f"Sentimen: {sentiment_result}")
     else:
-        sentiment_result = "Tidak ada input"
-
-    # Display the sentiment result below the text area
-    st.write(f"Sentiment: {sentiment_result}")
+        st.write("Tidak ada input")
