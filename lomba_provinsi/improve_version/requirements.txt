@@ -1,5 +1,5 @@
+nltk
 wordcloud
 pandas
 numpy
 Sastrawi
-nltk

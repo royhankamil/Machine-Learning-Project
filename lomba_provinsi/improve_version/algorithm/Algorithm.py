@@ -7,6 +7,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
 import re
+nltk.download("punkt")
+nltk.download("stopwords")
 
 class Preprocessing:
     def __init__(self, word_set, index_dict, word_count, total_documents):
