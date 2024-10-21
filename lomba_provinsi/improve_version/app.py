@@ -7,6 +7,8 @@ import pickle
 from algorithm.Algorithm import KNN
 from algorithm.Algorithm import Preprocessing
 import os
+import nltk
+nltk.download('punkt')
 
 # Load pre-trained model and supporting files
 def load_pickle(file_path):
