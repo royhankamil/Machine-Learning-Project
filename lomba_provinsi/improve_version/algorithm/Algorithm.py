@@ -5,13 +5,13 @@ import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-nltk.download("punkt", download_dir='/path/to/nltk_data')
-nltk.download("stopwords", download_dir='/path/to/nltk_data')
 import string
 import re
 
 class Preprocessing:
     def __init__(self, word_set, index_dict, word_count, total_documents):
+        nltk.download("punkt")
+        nltk.download("stopwords")
         self.word_set = word_set
         self.index_dict = index_dict
         self.word_count = word_count
