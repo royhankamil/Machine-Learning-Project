@@ -2,9 +2,6 @@
 import numpy as np
 import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-import nltk
-nltk.download("punkt")
-nltk.download("stopwords")
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import string
