@@ -10,6 +10,7 @@ import os
 import nltk
 
 nltk.download("punkt")
+nltk.download("punkt_tab")
 nltk.download("stopwords")
 
 # Load pre-trained model and supporting files
