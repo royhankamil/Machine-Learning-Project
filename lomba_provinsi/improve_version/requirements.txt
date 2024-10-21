@@ -2,3 +2,4 @@ wordcloud
 pandas
 numpy
 Sastrawi
+nltk
