@@ -4,8 +4,8 @@ import numpy as np
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import pickle
-from Algorithm import KNN
-from Algorithm import Preprocessing
+from algorithm.Algorithm import KNN
+from algorithm.Algorithm import Preprocessing
 
 # Load pre-trained model and supporting files
 def load_pickle(file_path):
@@ -32,7 +32,8 @@ def display_wordcloud(column_data, title, colormap="Blues_r"):
         height=800,
         width=1200,
         collocations=False,
-        colormap=colormap
+        colormap=colormap,
+        random_state=123
     ).generate(' '.join(column_data.dropna().to_list()))
     fig, ax = plt.subplots(figsize=(12, 8))
     ax.imshow(wordcloud, interpolation="bilinear")
@@ -40,19 +41,10 @@ def display_wordcloud(column_data, title, colormap="Blues_r"):
     st.pyplot(fig)
 
 # Title and subheader
-st.title("Komentar Sentimen")
-st.subheader("Visualisasi Data Sentimen")
+st.title("Pendeteksi Komentar Negatif")
 
-# Load data for WordCloud visualization
-all_wordo = pd.read_csv("all_word_data.csv")
-
-# Display WordClouds for different categories
-display_wordcloud(all_wordo["Ras"], "Distribusi Sentimen (WordCloud - Ras)")
-display_wordcloud(all_wordo["Agama"], "Distribusi Sentimen (WordCloud - Agama)")
-display_wordcloud(all_wordo["Netral"], "Distribusi Sentimen (WordCloud - Netral)")
-
-# Input area for user comment
 st.subheader("Komentar Sentimen")
+# Input area for user comment
 user_input = st.text_area("Masukkan komentar Anda di sini:")
 
 # Prediction button and result
@@ -63,3 +55,13 @@ if st.button("Prediksi"):
         st.write(f"Sentimen: {sentiment_result}")
     else:
         st.write("Tidak ada input")
+st.subheader("Visualisasi Data Sentimen")
+
+# Load data for WordCloud visualization
+all_wordo = pd.read_csv("Training/all_word_data.csv")
+
+# Display WordClouds for different categories
+display_wordcloud(all_wordo["Ras"], "Distribusi Sentimen (WordCloud - Ras)")
+display_wordcloud(all_wordo["Agama"], "Distribusi Sentimen (WordCloud - Agama)")
+display_wordcloud(all_wordo["Netral"], "Distribusi Sentimen (WordCloud - Netral)")
+
