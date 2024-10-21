@@ -15,24 +15,17 @@ def load_pickle(file_path):
     
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(BASE_DIR, 'model/knn_model.pkl')
-
-BASE_DIR1 = os.path.dirname(os.path.abspath(__file__))
-model_path1 = os.path.join(BASE_DIR1, 'model/word_set.pkl')
-
-BASE_DIR2 = os.path.dirname(os.path.abspath(__file__))
-model_path2 = os.path.join(BASE_DIR2, 'model/index_dict.pkl')
-
-BASE_DIR3 = os.path.dirname(os.path.abspath(__file__))
-model_path3 = os.path.join(BASE_DIR3, 'model/word_count.pkl')
-
-BASE_DIR4 = os.path.dirname(os.path.abspath(__file__))
-model_path4 = os.path.join(BASE_DIR4, 'model/preprocessing.pkl')
+word_set_path = os.path.join(BASE_DIR, 'model/word_set.pkl')
+indexdict_path = os.path.join(BASE_DIR, 'model/index_dict.pkl')
+word_count_path = os.path.join(BASE_DIR, 'model/word_count.pkl')
+preprocessing_path = os.path.join(BASE_DIR, 'model/preprocessing.pkl')
+alldata_path = os.path.join(BASE_DIR, 'Training/all_word_data.csv')
 
 model = load_pickle(model_path)
-word_set = load_pickle(model_path1)
-index_dict = load_pickle(model_path2)
-word_count = load_pickle(model_path3)
-preprocessing = load_pickle(model_path4)
+word_set = load_pickle(word_set_path)
+index_dict = load_pickle(indexdict_path)
+word_count = load_pickle(word_count_path)
+preprocessing = load_pickle(preprocessing_path)
 
 # Function to predict sentiment based on input text
 def predict_sentiment(input_text):
@@ -74,7 +67,7 @@ if st.button("Prediksi"):
 st.subheader("Visualisasi Data Sentimen")
 
 # Load data for WordCloud visualization
-all_wordo = pd.read_csv("Training/all_word_data.csv")
+all_wordo = pd.read_csv(alldata_path)
 
 # Display WordClouds for different categories
 display_wordcloud(all_wordo["Ras"], "Distribusi Sentimen (WordCloud - Ras)")
