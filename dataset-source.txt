@@ -1,0 +1,64 @@
+Nasional Dataset Publik
+
+-Badan Pusat Statistik Pusat [https://www.bps.go.id/]
+
+-Badan Pusat Statistik DKI Jakarta [https://jakarta.bps.go.id/]
+
+-Satu Data Indonesia [https://data.go.id]
+
+-Satu Data Jakarta [https://satudata.jakarta.go.id/]
+
+-Open Data Jawa Barat [https://opendata.jabarprov.go.id/id]
+
+-Open Data Jawa Tengah [https://dpubinmarcipka.jatengprov.go.id/open-data/]
+
+-Open Data Jawa Timur [https://opendata.jatimprov.go.id/]
+
+-Jakarta Satu (Geospasial)[https://jakartasatu.jakarta.go.id/portal/apps/sites/#/public]
+
+-Databoks [https://databoks.katadata.co.id/]
+
+-Profil Tenaga Kesehatan [https://satusehat.kemkes.go.id/data/dashboard/c8b80eb9-07bd-4ac9-82c9-13993a360a34]
+
+-Situasi Kondisi Internet Puskesmas [https://satusehat.kemkes.go.id/data/dashboard/2698b2e4-ec08-471f-aa71-ff3d05927600]
+
+-Demografi Kewilayahan [https://www.bps.go.id/id/statistics-table?subject=519]
+
+-API Databoks [https://api-databoks.katadata.co.id]
+
+-How to get more data: [https://drive.google.com/drive/folders/1jn9gSTCLW7dENG9FSnDKwqEB9bO13o8b]
+
+ 
+
+International Dataset Publik
+
+-Nasdaq [https://data.nasdaq.com/]
+
+-World Bank [https://data.worldbank.org/]
+
+-UC Irvine [https://archive.ics.uci.edu/datasets]
+
+-⁠Bone Age Regression [⁠https://www.kaggle.com/c/bone-age-regression/data]
+
+⁠ECG Heartbeat Categorization Dataset [https://www.kaggle.com/datasets/shayanfazeli/heartbeat]
+
+-Out-of-Scope Intent Classification Dataset [⁠https://www.kaggle.com/datasets/stefanlarson/outofscope-intent-classification-dataset]
+
+-⁠ATIS Airline Travel Information System [https://www.kaggle.com/datasets/hassanamin/atis-airlinetravelinformationsystem]
+
+-⁠HRV Prediction [https://www.kaggle.com/datasets/saurabhshahane/hvr-prediction]
+
+ 
+
+Dataset Explorer
+-Kaggle [https://www.kaggle.com/datasets]
+
+-Google Cloud [https://cloud.google.com/datasets]
+
+-Tableau (External Source) [https://www.tableau.com/learn/articles/free-public-data-sets]
+
+-Google Research [https://datasetsearch.research.google.com/]
+
+-Datahub [https://datahub.io/search]
+
+-Face Dataset [https://urlis.net/datasetFace]
