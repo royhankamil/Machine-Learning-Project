@@ -2,7 +2,7 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, CallbackContext
 
-TOKEN = "8284439526:AAEeqlCdMFgs_tGrMiDM-J_1utkaClYML9A"
+TOKEN = "your_token"
 
 async def start(update: Update, context: CallbackContext):
     await update.message.reply_text("Halo! Aku bot sederhana. Ketik sesuatu untuk mulai ngobrol!")
