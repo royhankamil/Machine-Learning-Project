@@ -10,7 +10,8 @@ class OLSClassifier:
         lr=0.01,                # learning rate
         solver="closed_form",   # metode optimasi: closed_form atau gradient_descent
         threshold=0.5,          # ambang batas klasifikasi
-        clip_proba=True         # membatasi output agar berada di rentang [0, 1]
+        clip_proba=True,         # membatasi output agar berada di rentang [0, 1]
+        n_classes=2
     ):
         # Menyimpan parameter sebagai atribut objek
         self.fit_intercept = fit_intercept
@@ -21,6 +22,7 @@ class OLSClassifier:
         self.solver = solver
         self.threshold = threshold
         self.clip_proba = clip_proba
+        self.n_classes = n_classes
 
     def _add_intercept(self, X):
         # Menambahkan kolom 1 sebagai bias (intercept)
@@ -112,14 +114,21 @@ class OLSClassifier:
 
     def predict(self, X):
         # Klasifikasi berdasarkan threshold
-        proba = self.predict_proba(X)[:, 1]
-        return (proba >= self.threshold).astype(int)
+        scores = self.decision_function(X)
+        preds = np.round(scores)
+        preds = np.clip(preds, 0, self.n_classes - 1)
+
+        return preds.astype(int)
     
     def predict_percentage(self, X):
         # Mengembalikan probabilitas kelas terpilih dalam persen
-        cls = self.predict(X)[0]
-        return str(self.predict_proba(X)[0][cls] * 100)[:5]
+        score = self.decision_function(X)[0]
+        cls = int(np.clip(round(score), 0, self.n_classes - 1))
+        score = self.decision_function(X)[0]
+        confidence = 1 - abs(score - cls)
 
+        return f"{confidence * 100:.2f}%"
+    
     def score(self, X, y):
         # Menghitung akurasi
         y_pred = self.predict(X)
